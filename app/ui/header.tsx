@@ -1,15 +1,18 @@
+'use client'
+
 import Link from "next/link";
 import useCartStore from "../store/cartStore";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import AcmeLogo from "./acme-logo";
 
 export default function Header() {
     const { items } = useCartStore((state) => state)
 
     return (
         <header>
-            <nav className="flex items-center justify-between h-12 px-4 bg-gray-800 text-white">
+            <nav className="flex items-center justify-between px-4 bg-gray-800 text-white">
                 <Link href="/">
-                    daa duty free
+                    <AcmeLogo />
                 </Link>
                 <div>
                     <span className="cart-badge">{items.reduce((sum, i) => sum + i.quantity, 0)}</span>
