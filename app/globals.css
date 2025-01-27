@@ -19,3 +19,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.cart-badge {
+  position: absolute;
+  font-weight: bold;
+  color: #fb923c; /* Tailwind's text-orange-600 */
+  margin-left: 1rem; /* Tailwind's ml-4 */
+  padding-left: 1rem
+}
