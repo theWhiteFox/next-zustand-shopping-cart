@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ProductCard } from "./product-card";
 import useCartStore from "@/app/store/cartStore";
 import clsx from "clsx";
+import { Button } from "../button";
 
 export const ProductCart = () => {
     const { items } = useCartStore((state) => state)
@@ -17,15 +18,15 @@ export const ProductCart = () => {
     return (
         <>
             <div className="p-4">
-                <div className="container">
-                <Link href="/">
-                    <h2 className={clsx(
-                        "mt-4 hover:text-white font-bold py-2 px-4 rounded",
-                        "hover:outline-none focus:shadow-outline text-blue-500 "
-                    )}>Back to Products</h2>
-                </Link>
-                </div>
-                <h2 className="text-2xl font-bold">Cart ({items.reduce((sum, i) => sum + i.quantity, 0)})
+                <Button className={clsx(
+                    "mt-4 hover:text-white font-bold rounded",
+                    "hover:outline-none focus:shadow-outline text-white-500"
+                )}>
+                    <Link href="/">
+                        Back to Products
+                    </Link>
+                </Button>
+                <h2 className="py-8 text-2xl font-bold">Cart ({items.reduce((sum, i) => sum + i.quantity, 0)})
                 </h2>
                 {items.length > 0 ? items.map((item) => (
                     <ProductCard

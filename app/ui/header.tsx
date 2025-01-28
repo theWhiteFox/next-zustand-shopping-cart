@@ -10,7 +10,7 @@ export default function Header() {
 
     return (
         <header>
-            <nav className="flex items-center justify-between px-4 bg-gray-800 text-white">
+            <nav className="flex items-center justify-between px-8 py-6 bg-gray-800 text-white">
                 <Link href="/">
                     <AcmeLogo />
                 </Link>

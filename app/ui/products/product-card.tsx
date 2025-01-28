@@ -22,7 +22,7 @@ export const ProductCard = ({ id, image_url, name, price, quantity }: ProductCar
                     height={40}
                     className="rounded-md"
                 />
-                <div className="ml-2">
+                <div className="ml-2 px-4">
                     <h3 className="text-lg font-bold">{name}</h3>
                     <p className="text-gray-400">Price: €{price}</p>
                 </div>
