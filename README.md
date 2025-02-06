@@ -11,6 +11,8 @@ Load cart items from localStorage when the application mounts.
 
 ## Getting Started
 
+[theWhiteFox blog Next Shopping cart Zustand](https://www.thewhitefoxdev.blog/blog/next-shopping-cart-zustand)
+
 First, run the development server:
 
 ```bash
