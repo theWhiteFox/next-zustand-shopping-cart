@@ -1,13 +1,5 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Project Overview
-This project is a web front-end application that includes a shopping cart feature. The application allows users to view products, add them to a cart, and persist the cart items using localStorage.
-
-## Features
-Display a list of products with their details.
-Add products to the shopping cart.
-Persist cart items in localStorage to maintain state across sessions.
-Load cart items from localStorage when the application mounts.
 
 ## Getting Started
 
@@ -33,6 +25,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Learn More
 
+[blog post](https://www.thewhitefoxdev.blog/blog/next-shopping-cart-zustand)
+
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
@@ -46,5 +40,4 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-Web Front-End Developer Test
 

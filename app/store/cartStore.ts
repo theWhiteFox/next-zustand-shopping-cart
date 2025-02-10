@@ -1,30 +1,32 @@
-import { create } from "zustand";
+import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { Product } from "../lib/definitions";
-import toast from "react-hot-toast";
+import { Product } from '../lib/definitions'
+import toast from 'react-hot-toast'
 
 interface CartItem extends Product {
     quantity: number
 }
 
-interface cartState {
-    removeFromCart(id: number): void;
+interface CartState {
+    removeFromCart(id: number): void
     items: CartItem[]
     addToCart: (product: Product) => void
-    updateQuantity: (type: "increment" | "decrement", id: number) => void;
+    remove: (product: Product) => void
+    removeItemCart: (product: Product) => void
+    updateQuantity: (type: "increment" | "decrement", id: number) => void
 }
 
-const useCartStore = create<cartState>()(
+const useCartStore = create<CartState>()(
     persist(
         (set, get) => ({
             persist: true,
             items: [],
             addToCart: (product) => {
-                let existingItem: CartItem | undefined;
+                let existingProduct: CartItem | undefined
                 set((state) => {
-                    existingItem = state.items.find((item) => item.id === product.id);
+                    existingProduct = state.items.find((item) => item.id === product.id)
                     return {
-                        items: existingItem
+                        items: existingProduct
                             ? get().items
                             : [
                                 ...get().items,
@@ -34,41 +36,65 @@ const useCartStore = create<cartState>()(
                                     name: product.name,
                                     price: product.price,
                                     image_url: product.image_url,
+                                    inStock: product.inStock,
+                                    amount: product.amount
                                 },
                             ],
-                    };
-                });
+                    }
+                })
 
-                if (existingItem) {
-                    toast.error("Product Already exists");
+                if (existingProduct) {
+                    toast.error("Product Already exists")
                 } else {
-                    toast.success("Product Added successfully");
+                    toast.success("Product Added successfully")
+                }
+            },
+            remove: (product) => {
+                const existingProduct = get().items.find((item) => item.id === product.id)
+                if (existingProduct) {
+                    set({
+                        items: get().items.filter((item) => item.id !== product.id)
+                    })
+                    toast.success("Product removed successfully")
+                } else {
+                    toast.error("Product not found in cart")
                 }
             },
             removeFromCart: (id: number) => {
                 set({
                     items: get().items.filter((item) => item.id !== id),
-                });
-                toast.success("Item removed");
+                })
+                toast.success("Item removed")
+            },
+            removeItemCart: (product: Product) => {
+                set({
+                    items: get().items.filter((item) => item.id !== product.id),
+                })
+                toast.success("Item removed")
             },
             updateQuantity: (type: string, id: number) => {
-                const item = get().items.find((item) => item.id === id);
+                const item = get().items.find((item) => item.id === id)
                 if (!item) {
-                    return;
+                    return
                 }
                 if (item.quantity === 1 && type === "decrement") {
-                    get().removeFromCart(id);
-                } else {
+                    get().removeFromCart(id)
+                } 
+                if (item.quantity >= item.amount! && type === "increment") {
+                    toast.error("Item not in stock")
+                }
+                else {
                     item.quantity =
-                        type === "decrement" ? item.quantity - 1 : item.quantity + 1;
+                        type === "decrement" ? item.quantity - 1 : item.quantity + 1
                     set({
                         items: [...get().items],
-                    });
+                    })
                 }
             },
         }),
         {
-            name: 'cart-storage', // name of the item in the storage (must be unique)s
+            name: 'cart-storage', // Name of the item in storage (must be unique). 
+            // Uses localStorage by default
         }
     )
 )

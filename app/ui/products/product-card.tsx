@@ -1,9 +1,10 @@
 'use client'
 
 import { Product } from "@/app/lib/definitions"
-import Image from 'next/image';
-import { Button } from '@/app/ui/button';
-import useCartStore from "@/app/store/cartStore";
+import Image from 'next/image'
+import { Button } from '@/app/ui/button'
+import useCartStore from "@/app/store/cartStore"
+import { RemoveProductButton } from "./remove-product-button"
 
 interface ProductCardProps extends Product {
     quantity: number
@@ -27,6 +28,13 @@ export const ProductCard = ({ id, image_url, name, price, quantity }: ProductCar
                     <p className="text-gray-400">Price: €{price}</p>
                 </div>
             </div>
+            <RemoveProductButton 
+                quantity={quantity} 
+                id={id} 
+                name={name} 
+                price={price} 
+                image_url={""} 
+            />
             <div className="flex items-center">
                 <Button onClick={() => updateQuantity("decrement", id)}>
                     -
