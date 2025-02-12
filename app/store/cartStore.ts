@@ -1,20 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { Product } from '../lib/definitions'
+import { CartItem, CartState, Product } from '../lib/definitions'
 import toast from 'react-hot-toast'
-
-interface CartItem extends Product {
-    quantity: number
-}
-
-interface CartState {
-    removeFromCart(id: number): void
-    items: CartItem[]
-    addToCart: (product: Product) => void
-    remove: (product: Product) => void
-    removeItemCart: (product: Product) => void
-    updateQuantity: (type: "increment" | "decrement", id: number) => void
-}
 
 const useCartStore = create<CartState>()(
     persist(

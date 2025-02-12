@@ -2,6 +2,7 @@
 
 import { Product } from "@/app/lib/definitions"
 import useCartStore from "@/app/store/cartStore"
+import { TrashIcon } from "@heroicons/react/16/solid"
 import clsx from "clsx"
 
 interface RemoveProductButtonProps extends Product {
@@ -21,11 +22,11 @@ export const RemoveProductButton = ({ id }: RemoveProductButtonProps) => {
                     image_url: ""
                 })}
                     className={clsx(
-                        "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded",
+                        "bg-gray-500 hover:bg-gray-700 text-white font-bold p-2 rounded",
                         "focus:outline-none focus:shadow-outline"
                     )}
                 >
-                    Remove
+                    <TrashIcon className="h-6 w-6" />
                 </button>
             </div>
         </div>
