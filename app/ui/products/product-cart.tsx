@@ -1,30 +1,34 @@
 'use client'
 
-import Link from "next/link";
-import { ProductCard } from "./product-card";
-import useCartStore from "@/app/store/cartStore";
-import clsx from "clsx";
+import { ProductCard } from "./product-card"
+import useCartStore from "@/app/store/cartStore"
+import clsx from "clsx"
+import { Button } from "../button"
+import { ArrowLeftIcon } from "@heroicons/react/16/solid"
 
 export const ProductCart = () => {
     const { items } = useCartStore((state) => state)
     const subtotal = items.reduce(
         (total, item) => total + item.price * item.quantity,
         0
-    );
+    )
 
     const total = subtotal
 
     return (
         <>
             <div className="p-4">
-                <Link href="/">
-                    <button className={clsx(
-                        "mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold mt-4 hover:text-white font-bold rounded py-2 px-4",
+                <Button
+                    onClick={() => window.location.href = '/'}
+                    className={clsx(
+                        "w-32 mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold hover:text-white rounded py-2 px-4",
                         "hover:outline-none focus:shadow-outline text-white-500"
-                    )}>
-                        Back to Products
-                    </button>
-                </Link>
+                    )}
+                >
+                    <ArrowLeftIcon className="w-4 text-white-700" />
+                    <span className="pl-1">Products</span>
+
+                </Button>
                 <h2 className="py-8 text-2xl font-bold">Cart ({items.reduce((sum, i) => sum + i.quantity, 0)})
                 </h2>
                 {items.length > 0 ? items.map((item) => (
@@ -44,5 +48,5 @@ export const ProductCart = () => {
                 <span>€{total.toFixed(2)}</span>
             </div>
         </>
-    );
+    )
 }

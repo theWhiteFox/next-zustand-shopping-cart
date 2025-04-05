@@ -4,10 +4,12 @@ import Image from "next/image"
 import clsx from 'clsx'
 import { data } from "@/app/lib/placeholder-data"
 import useCartStore from "@/app/store/cartStore"
+import { Button } from "../button"
+import { ShoppingCartIcon } from "@heroicons/react/16/solid"
 
 
 export default function ProductsTable() {
-    const products = data.products;
+    const products = data.products
     const addToCart = useCartStore((state) => state.addToCart)
     const remove = useCartStore((state) => state.remove)
     const { items } = useCartStore((state) => state)
@@ -30,7 +32,7 @@ export default function ProductsTable() {
                         <p className="text-gray-500">In stock: {product.inStock ? '✅' : '❌'}</p>
 
                         {items.some(item => item.id === product.id) ? (
-                            <button
+                            <Button
                                 onClick={() => remove({
                                     ...product,
                                 })}
@@ -39,10 +41,11 @@ export default function ProductsTable() {
                                     "focus:outline-none focus:shadow-outline"
                                 )}
                             >
-                                Remove from Cart
-                            </button>
+                                <span className="px-1">Remove</span>
+                                <ShoppingCartIcon className="h-5 w-5 text-white-700" />
+                            </Button>
                         ) : (
-                            <button
+                            <Button
                                 onClick={() => addToCart({
                                     ...product,
                                 })}
@@ -51,11 +54,12 @@ export default function ProductsTable() {
                                     "focus:outline-none focus:shadow-outline"
                                 )}
                             >
-                                Add to Cart
-                            </button>
+                                <span className="px-1">Add to</span>
+                                <ShoppingCartIcon className="h-5 w-5 text-white-700" />
+                            </Button>
                         )}
-
                     </div>
+
                 ))}
             </div>
         </>
